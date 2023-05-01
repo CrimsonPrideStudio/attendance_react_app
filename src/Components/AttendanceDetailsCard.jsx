@@ -1,14 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import AttendanceDetailsCardItems from "./AttendanceDetailsCardItems";
+import React from 'react';
+import styled from 'styled-components';
+import AttendanceDetailsCardItems from './AttendanceDetailsCardItems';
 
 const Container = styled.div`
-  
   margin-top: 20px;
 
   transition: all 0.2s;
-
-  
 `;
 const Wrapper = styled.div`
   padding-left: 20px;
@@ -61,8 +58,6 @@ const AttendanceDetailsCard = () => {
           <Semester>Semester: 7th</Semester>
         </Top>
         <Bottom>
-          <AttendanceDetailsCardItems />
-          <AttendanceDetailsCardItems />
           <AttendanceDetailsCardItems />
           <AttendanceDetailsCardItems />
           <AttendanceDetailsCardItems />

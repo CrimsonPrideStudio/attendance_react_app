@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "styled-components";
-import SideBarItems from "./SideBarItems";
-import { MdDashboard } from "react-icons/md";
-import { BsFillPersonFill } from "react-icons/bs";
-import { HiUserGroup } from "react-icons/hi";
-import { FaUserGraduate } from "react-icons/fa";
-import { RiUserSettingsLine } from "react-icons/ri";
-import { Logout } from "@mui/icons-material";
+import React from 'react';
+import styled from 'styled-components';
+import SideBarItems from './SideBarItems';
+import { MdDashboard } from 'react-icons/md';
+import { BsFillPersonFill } from 'react-icons/bs';
+import { HiUserGroup } from 'react-icons/hi';
+import { FaUserGraduate } from 'react-icons/fa';
+import { RiUserSettingsLine } from 'react-icons/ri';
+import { Logout } from '@mui/icons-material';
+import { Link } from 'react-router-dom';
 
 const Container = styled.div`
   float: left;
@@ -32,7 +33,7 @@ const Top = styled.div`
   text-align: center;
   flex-direction: column;
   border-bottom: 1px solid white;
-height: 67px;
+  height: 67px;
 `;
 
 const Middle = styled.div`
@@ -42,7 +43,7 @@ const Middle = styled.div`
 `;
 
 const Bottom = styled.div`
-  flex-grow:1;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -59,47 +60,54 @@ const Label = styled.h5`
   padding-left: 15px;
 `;
 const Title = styled.h1`
-  font-family: "IBM Plex Sans Condensed", sans-serif;
+  font-family: 'IBM Plex Sans Condensed', sans-serif;
   font-size: 30px;
- margin-top: 10px;
+  margin-top: 10px;
   color: white;
-
 `;
+
 const Sidebar = () => {
-  let fontSize = { fontSize: "20px", color: "#ffffff" };
+  let fontSize = { fontSize: '20px', color: '#ffffff' };
   return (
     <Container>
       <Wrapper>
         <Top>
           <Title>Attendance App</Title>
-
         </Top>
 
         <Middle>
           <Label>Home</Label>
-          <SideBarItems
-            name="Dashboard"
-            icon={<MdDashboard style={fontSize} />}
-          />
+          <Link to='/' style={{ textDecoration: 'none' }}>
+            <SideBarItems
+              name='Dashboard'
+              icon={<MdDashboard style={fontSize} />}
+            />
+          </Link>
           <Label>Organize</Label>
-          <SideBarItems
-            name="Students"
-            icon={<FaUserGraduate style={fontSize} />}
-          />
-          <SideBarItems
-            name="Faculty"
-            icon={<HiUserGroup style={fontSize} />}
-          />
+          <Link to='' style={{ textDecoration: 'none' }}>
+            <SideBarItems
+              name='Students'
+              icon={<FaUserGraduate style={fontSize} />}
+            />
+          </Link>
+          <Link to='' style={{ textDecoration: 'none' }}>
+            <SideBarItems
+              name='Faculty'
+              icon={<HiUserGroup style={fontSize} />}
+            />
+          </Link>
           <Label>Manage</Label>
-          <SideBarItems
-            name="User"
-            icon={<BsFillPersonFill style={fontSize} />}
-          />
+          <Link to='' style={{ textDecoration: 'none' }}>
+            <SideBarItems
+              name='User'
+              icon={<BsFillPersonFill style={fontSize} />}
+            />
+          </Link>
         </Middle>
 
         <Bottom>
           <LogoutPanel>
-          <SideBarItems name = "LogOut" icon = {<Logout style={fontSize} />} />
+            <SideBarItems name='LogOut' icon={<Logout style={fontSize} />} />
           </LogoutPanel>
         </Bottom>
       </Wrapper>
