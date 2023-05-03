@@ -60,19 +60,19 @@ export default function StudentHeader(students) {
     <Container>
       <Left>
         <Top>
-          <StudentData>{students.details.name}</StudentData>
+          <StudentData>{students.details.Name}</StudentData>
         </Top>
         <Down>
-          <StudentData>Roll Number: {students.details.rollNumber}</StudentData>
-          <StudentData>Year: {students.collegeYear}</StudentData>
-          <StudentData>Course: {students.details.stream}</StudentData>
-          <StudentData>Enrollnment Number: BH3542</StudentData>
-          <StudentData>DOB: 25 Sep 2002</StudentData>
-          <StudentData>Gender: Male</StudentData>
+          <StudentData>Roll Number: {students.details.student_id}</StudentData>
+          <StudentData>Year: {students.details.semester}</StudentData>
+          <StudentData>Course: {students.details.Stream}</StudentData>
+          <StudentData>Enrollnment Number: {students.details.EnrollNumber}</StudentData>
+          <StudentData>DOB: {students.details.DOB}</StudentData>
+          <StudentData>Gender: {students.details.Gender}</StudentData>
           <StudentData>
-            Mobile Number: +91-{students.details.mobileNumber}
+            Mobile Number: {students.details.MobileNumber}
           </StudentData>
-          <StudentData>Email: Priyanshusahu833@gmail.com </StudentData>
+          <StudentData>Email: {students.details.Email} </StudentData>
         </Down>
       </Left>
       <Right>

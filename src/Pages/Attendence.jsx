@@ -1,13 +1,10 @@
 import React from "react";
-import { useRef, useState ,useEffect} from "react";
+import { useRef, useState, useEffect } from "react";
 import styled from "styled-components";
 import AttendanceDetailsCard from "../Components/AttendanceDetailsCard";
 import Sheet from "../Components/Sheet";
 import Navbar from "../Components/Navbar";
 import Sidebar from "../Components/Sidebar";
-
-import { db } from "../Components/Utility/firebase-config";
-import { onValue, ref } from "firebase/database";
 import MiddleNavBar from "../Components/MiddleNavBar";
 
 const Container = styled.div`
@@ -24,39 +21,38 @@ const ScrollWa = styled.div`
   height: 100%;
 `;
 const Attendence = () => {
-  const [scrollTop, setScrollTop] = useState(0);
-  const containerRef = useRef(null);
+  const [attendance, setAttendance] = useState([]);
 
-  const handleScroll = () => {
-    setScrollTop(containerRef.current.scrollTop);
-  };
-  useEffect(() => {
-    const query = ref(db, "Attendance/4/CSE/Hindi");
-    return onValue(query, (snapshot) => {
-      const data = snapshot.val();
-      const parentKey = Object.keys; // Get the key of the parent node
-  
-      if (snapshot.exists()) {
-        Object.values(data).map((datas) => {
-          console.log("Parent Key:", parentKey); // Log the parent key
-          console.log("Child Data:", datas); // Log the child data
-        });
-      }
-    });
+  useEffect( () => {
+    fetch(
+      `http://192.168.1.3:5000/attendance/?student_id=301202219021&subject=Mathmatics`
+    )
+      .then((response) => response.json())
+      .then((data) => setAttendance(data));
+    console.log(attendance);
   }, []);
   return (
     <Container>
       <Sidebar />
-      <Navbar name={"Student"} />
+      <Navbar name={""} />
       <ScrollWa>
         <AttendanceDetailsCard />
         <MiddleNavBar />
 
-        <Wrapper
-          ref={containerRef}
-          screenY={window.screen.height}
-          onScroll={handleScroll}
-        ></Wrapper>
+        <Wrapper screenY={window.screen.height}>
+          {attendance.map((data) => {
+            return (
+              <Sheet
+                key={data.id}
+                rollNumber={data.student_id}
+                Name={data.Name}
+                Present={data.Present}
+                Stream={data.Stream}
+                semester={data.semester}
+              />
+            );
+          })}
+        </Wrapper>
       </ScrollWa>
     </Container>
   );
