@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
+import React from 'react';
+import styled from 'styled-components';
 
-import Pbar from "./ProgressBar/ProgressBar";
+import Pbar from './ProgressBar/ProgressBar';
 
 const Card1 = styled.div`
   margin: 20px;
@@ -36,27 +36,27 @@ const Circle = styled.div`
 `;
 
 export default function Card(props) {
-  const day = props.date.toLocaleString("en-US", { day: "2-digit" });
-  let month = props.date.toLocaleString("en-US", { month: "long" });
-  month = month.length > 5 ? month.slice(0, 3) : month;
-  const year = props.date.getFullYear();
+  // const day = props.date.toLocaleString('en-US', { day: '2-digit' });
+  // let month = props.date.toLocaleString('en-US', { month: 'long' });
+  // month = month.length > 5 ? month.slice(0, 3) : month;
+  // const year = props.date.getFullYear();
+
+  console.log(props);
 
   return (
-    <>
-      <Card1 >
-        <Sname>{props.sub_name}</Sname>
-        <Circle>
-          {" "}
-          <Pbar percentage={props.percentage}></Pbar>{" "}
-        </Circle>
-        <Year> {props.year} </Year>
-        <Tname> {props.teacher} </Tname>
-        <Date>
-          <div style={{ position: "absolute" }}>
-            {day} {month} {year}
-          </div>
-        </Date>
-      </Card1>
-    </>
+    <Card1>
+      <Sname>{props.subject}</Sname>
+      <Circle>
+        {' '}
+        <Pbar percentage={props.percentage}></Pbar>{' '}
+      </Circle>
+      <Year> {props.semester} </Year>
+      <Tname> {props.teacher} </Tname>
+      {/* <Date>
+        <div style={{ position: 'absolute' }}>
+          {day} {month} {year}
+        </div>
+      </Date> */}
+    </Card1>
   );
 }

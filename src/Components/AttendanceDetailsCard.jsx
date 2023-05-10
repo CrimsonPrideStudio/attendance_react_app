@@ -48,20 +48,28 @@ const Stream = styled.span`
   color: #99a1b1;
   font-weight: 600;
 `;
-const AttendanceDetailsCard = () => {
+const AttendanceDetailsCard = (props) => {
   return (
     <Container>
       <Wrapper>
         <Top>
-          <SubjectName>Subject: Quantum Mechanics</SubjectName>
-          <Stream>Stream: Computer Science And Engineering</Stream>
-          <Semester>Semester: 7th</Semester>
+          <SubjectName>Subject:{props.subject}</SubjectName>
+          <Stream>Stream: {props.stream}</Stream>
+          <Semester>Semester: {props.semester}</Semester>
         </Top>
         <Bottom>
-          <AttendanceDetailsCardItems />
-          <AttendanceDetailsCardItems />
-          <AttendanceDetailsCardItems />
-          <AttendanceDetailsCardItems />
+          <AttendanceDetailsCardItems
+            title={'Total Student'}
+            data={props.totalStudent}
+          />
+          <AttendanceDetailsCardItems
+            title={'Present Student'}
+            data={props.Present}
+          />
+          <AttendanceDetailsCardItems
+            title={'Absent Student'}
+            data={`${props.totalStudent - props.Present}`}
+          />
         </Bottom>
       </Wrapper>
     </Container>

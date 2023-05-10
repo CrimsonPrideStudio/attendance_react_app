@@ -40,14 +40,14 @@ const Value = styled.span`
   font-size: 30px;
   color: #1a1a1b;
 `;
-const AttendanceDetailsCardItems = () => {
+const AttendanceDetailsCardItems = (props) => {
   return (
     <Container>
       <Contain>
         <Icon src={icon} />
         <Wrapper>
-          <Title>Total Student</Title>
-          <Value>400</Value>
+          <Title>{props.title}</Title>
+          <Value>{props.data}</Value>
         </Wrapper>
       </Contain>
     </Container>

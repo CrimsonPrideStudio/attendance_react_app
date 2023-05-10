@@ -1,8 +1,8 @@
-import React from "react";
-import styled from "styled-components";
-import Filter from "./Filter";
-import Options from "./Options";
-import SearchBar from "./Searchbar";
+import React from 'react';
+import styled from 'styled-components';
+import Filter from './Filter';
+import Options from './Options';
+import SearchBar from './Searchbar';
 
 const Middle = styled.div`
   display: flex;
@@ -19,24 +19,25 @@ const End = styled.div`
   justify-content: flex-end;
 `;
 const Last = styled.div`
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    padding: 10px; 
-    align-items: center;
-    margin-right: 70px;
-    padding-left: 20px;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 10px;
+  width: 100%;
+  align-items: center;
+  margin-right: 70px;
+  padding-left: 20px;
 `;
 const Labels = styled.span`
-    
-`
+  width: 20%;
+  text-align: center;
+`;
 const MiddleNavBar = () => {
   return (
     <>
       <Options />
       <Middle>
         <Start>
-          {" "}
+          {' '}
           <SearchBar />
         </Start>
         <End>

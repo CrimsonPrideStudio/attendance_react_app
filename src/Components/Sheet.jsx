@@ -1,7 +1,7 @@
-import React from "react";
-import styled from "styled-components";
-import user from "../Image/user.png";
-import { Link } from "react-router-dom";
+import React from 'react';
+import styled from 'styled-components';
+import user from '../Image/user.png';
+import { Link } from 'react-router-dom';
 const Container = styled.div`
   background-color: white;
   display: flex;
@@ -62,19 +62,19 @@ const Detail = styled.a`
   margin-right: 20px;
 `;
 const styles = {
-  textDecoration: "none",
-  color: "inherit",
+  textDecoration: 'none',
+  color: 'inherit',
 };
 const Sheet = (Props) => {
   return (
     <Container>
       <Pack>
-        <CoverImg src={user} alt="Article Cover" />
+        <CoverImg src={user} alt='Article Cover' />
         <Name>{Props.Name}</Name>
       </Pack>
       <Attendance>
         <AttendanceText>
-          {Props.Present == 1 ? "Present" : "Absent"}
+          {Props.Present == 1 ? 'Present' : 'Absent'}
         </AttendanceText>
       </Attendance>
       <Stream>{Props.Stream}</Stream>

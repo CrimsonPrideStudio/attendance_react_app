@@ -17,40 +17,33 @@ const styles = {
   color: 'inherit',
 };
 function Cards() {
-  let data = [
-    {
-      sub_name: 'Compiler Design',
-      year: '4th Year',
-      teacher: 'Priyanshu',
-      date: new Date(2022, 11 - 1, 28),
-    },
-  ];
+  const [data, setData] = useState([]);
 
-  const [classes, setClasses] = useState([]);
   useEffect(() => {
-    const query = ref(db, '4 CSE');
-    return onValue(query, (snapshot) => {
-      const data = snapshot.val();
-
-      if (snapshot.exists()) {
-        Object.values(data).map((datas) => {
-          setClasses((classes) => [...classes, datas]);
-        });
-      }
-    });
+    fetch(`http://127.0.0.1:5000/dashboard/?Stream=All&semester=0`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
   }, []);
   return (
     <Wraper>
-      {classes.map((a) => {
+      {data.map((item) => {
         return (
-          <Link to='attendance/4/cse/english' style={styles}>
+          <Link
+            key={item.id}
+            to={`attendance/${item.semester}/${item.Stream}/${item.Subject}`}
+            style={styles}
+          >
             <Card
-              sub_name={a.subject}
-              year={a.collegeYear}
-              teacher={a.teacherName}
-              date={data[0].date}
-              percentage={95}
-            ></Card>
+              subject={item.Subject}
+              semester={item.semester}
+              date={item.Update_Date}
+              teacher={item.teacher}
+              percentage={`${(item.Present / item.Total_Student) * 100}`}
+            />
           </Link>
         );
       })}

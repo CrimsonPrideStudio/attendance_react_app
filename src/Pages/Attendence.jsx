@@ -1,11 +1,12 @@
-import React from "react";
-import { useRef, useState, useEffect } from "react";
-import styled from "styled-components";
-import AttendanceDetailsCard from "../Components/AttendanceDetailsCard";
-import Sheet from "../Components/Sheet";
-import Navbar from "../Components/Navbar";
-import Sidebar from "../Components/Sidebar";
-import MiddleNavBar from "../Components/MiddleNavBar";
+import React from 'react';
+import { useRef, useState, useEffect } from 'react';
+import styled from 'styled-components';
+import AttendanceDetailsCard from '../Components/AttendanceDetailsCard';
+import { useParams } from 'react-router-dom';
+import Sheet from '../Components/Sheet';
+import Navbar from '../Components/Navbar';
+import Sidebar from '../Components/Sidebar';
+import MiddleNavBar from '../Components/MiddleNavBar';
 
 const Container = styled.div`
   padding-left: 10px;
@@ -22,23 +23,33 @@ const ScrollWa = styled.div`
 `;
 const Attendence = () => {
   const [attendance, setAttendance] = useState([]);
+  const params = useParams();
+  const subject = params.subject;
 
-  useEffect( () => {
-    fetch(
-      `http://192.168.1.3:5000/attendance/?student_id=301202219021&subject=Mathmatics`
-    )
+  useEffect(() => {
+    fetch(`http://127.0.0.1:5000/attendance/?subject=${subject}`)
       .then((response) => response.json())
-      .then((data) => setAttendance(data));
-    console.log(attendance);
-  }, []);
+      .then((data) => {
+        setAttendance(data);
+        console.log(data);
+      });
+  }, [subject]);
+
   return (
     <Container>
       <Sidebar />
-      <Navbar name={""} />
+      <Navbar name={''} />
       <ScrollWa>
-        <AttendanceDetailsCard />
+        <AttendanceDetailsCard
+          subject={subject}
+          stream={attendance.length > 0 ? attendance[0].Stream : ''}
+          semester={attendance.length > 0 ? attendance[0].semester : ''}
+          Present={attendance.length > 0 ? attendance[0].Present : ''}
+          totalStudent={
+            attendance.length > 0 ? attendance[0].Total_Student : ''
+          }
+        />
         <MiddleNavBar />
-
         <Wrapper screenY={window.screen.height}>
           {attendance.map((data) => {
             return (
