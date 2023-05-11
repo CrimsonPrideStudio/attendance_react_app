@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import user from "../Image/user.png";
+import React from 'react';
+import styled from 'styled-components';
+import user from '../Image/user.png';
 
 const Container = styled.div`
   display: flex;
@@ -66,7 +66,9 @@ export default function StudentHeader(students) {
           <StudentData>Roll Number: {students.details.student_id}</StudentData>
           <StudentData>Year: {students.details.semester}</StudentData>
           <StudentData>Course: {students.details.Stream}</StudentData>
-          <StudentData>Enrollnment Number: {students.details.EnrollNumber}</StudentData>
+          <StudentData>
+            Enrollnment Number: {students.details.EnrollNumber}
+          </StudentData>
           <StudentData>DOB: {students.details.DOB}</StudentData>
           <StudentData>Gender: {students.details.Gender}</StudentData>
           <StudentData>
@@ -76,7 +78,10 @@ export default function StudentHeader(students) {
         </Down>
       </Left>
       <Right>
-        <CoverImg src={user} alt="Profile Image" />
+        <CoverImg
+          src={students.details?.Profile ? students.details.Profile : user}
+          alt='Profile Image'
+        />
       </Right>
     </Container>
   );

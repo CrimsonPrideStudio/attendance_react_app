@@ -27,7 +27,9 @@ const Pack = styled.div`
 
 const CoverImg = styled.img`
   width: 35px;
+  height: 35px;
   border-radius: 50px;
+  object-fit: fill;
 `;
 const Name = styled.div`
   margin-left: 10px;
@@ -69,7 +71,10 @@ const Sheet = (Props) => {
   return (
     <Container>
       <Pack>
-        <CoverImg src={user} alt='Article Cover' />
+        <CoverImg
+          src='https://api.time.com/wp-content/uploads/2014/09/macaca_nigra_self-portrait_rotated_and_cropped.jpg?'
+          alt='Article Cover'
+        />
         <Name>{Props.Name}</Name>
       </Pack>
       <Attendance>

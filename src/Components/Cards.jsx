@@ -20,7 +20,7 @@ function Cards() {
   const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/dashboard/?Stream=All&semester=0`)
+    fetch(`http://localhost:5000/dashboard/?Stream=All&semester=0`)
       .then((response) => response.json())
       .then((data) => {
         setData(data);

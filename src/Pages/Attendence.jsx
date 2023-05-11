@@ -27,7 +27,7 @@ const Attendence = () => {
   const subject = params.subject;
 
   useEffect(() => {
-    fetch(`http://127.0.0.1:5000/attendance/?subject=${subject}`)
+    fetch(`http://localhost:5000/attendance/?subject=${subject}`)
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);

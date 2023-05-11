@@ -1,5 +1,5 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import Navbar from '../Components/Navbar';
 import styled from 'styled-components';
 import Sidebar from '../Components/Sidebar';
@@ -13,32 +13,33 @@ const Container = styled.div`
 
 const Student = () => {
   const [students, setStudents] = useState({});
-  let location = useLocation();
-  let studentId = location.pathname.split('/')[2];
+  // let location = useLocation();
+  // let studentId = location.pathname.split('/')[2];
+  const params = useParams();
+  const studentId = params.rollNumber;
+
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://192.168.1.12:5000/student?student_id=${studentId}`)
+      fetch(`http://localhost:5000/student?student_id=${studentId}`)
         .then((response) => response.json())
-        .then((data) => setStudents(data));
+        .then((data) => {
+          setStudents(data);
+          console.log(students);
+          console.log(data);
+        });
     };
     fetchData();
-  }, [studentId]);
+  }, []);
 
   return (
     <Container>
       <Sidebar />
-      <Navbar name={'Dashboard'} />
-      {students ? (
-        <>
-          <StudentHeader details={students} />
-          <StudentMiddleComponent
-            Stream={students.Stream}
-            semester={students.semester}
-          />
-        </>
-      ) : (
-        <div>Loading...</div>
-      )}
+      <Navbar name={'Student'} />
+      <StudentHeader details={students} />
+      {/* <StudentMiddleComponent
+        Stream={students.Stream}
+        semester={students.semester}
+      /> */}
     </Container>
   );
 };
