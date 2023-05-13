@@ -1,6 +1,6 @@
-import React from "react";
-import styled from "styled-components";
-import { BiSearchAlt } from "react-icons/bi";
+import React from 'react';
+import styled from 'styled-components';
+import { BiSearchAlt } from 'react-icons/bi';
 
 const Search = styled.div`
   display: flex;
@@ -48,17 +48,24 @@ const Input = styled.input`
     color: grey;
   }
 `;
-const Searchbar = () => {
+const Searchbar = ({ handleSearch }) => {
+  const handleFormSubmit = (e) => {
+    e.preventDefault();
+    const searchValue = e.target[0].value.toLowerCase();
+    handleSearch(searchValue);
+    console.log(searchValue);
+  };
+
   return (
     <Search>
-      <Form>
-        <Input type="text" placeholder="Search" />
+      <Form onSubmit={handleFormSubmit}>
+        <Input type='text' placeholder='Search' />
+        <Button type='submit'>
+          <BiSearchAlt
+            style={{ color: 'black', fontSize: '20px', marginLeft: '5px' }}
+          />
+        </Button>
       </Form>
-      <Button type="submit">
-        <BiSearchAlt
-          style={{ color: "black", fontSize: "20px", marginLeft: "5px" }}
-        />
-      </Button>
     </Search>
   );
 };

@@ -34,7 +34,7 @@ const Student = () => {
   return (
     <Container>
       <Sidebar />
-      <Navbar name={'Student'} />
+      <Navbar name={'Student Detail'} />
       <StudentHeader details={students} />
       {/* <StudentMiddleComponent
         Stream={students.Stream}

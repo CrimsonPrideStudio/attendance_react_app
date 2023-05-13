@@ -1,28 +1,46 @@
-import React from 'react'
-import Navbar from '../Components/Navbar'
-import styled from 'styled-components'
+import React, { useState, useEffect } from 'react';
+import Navbar from '../Components/Navbar';
+import styled from 'styled-components';
 import Sidebar from '../Components/Sidebar';
-import Cards from '../Components/Cards'
-
-
+import Cards from '../Components/Cards';
 
 const Container = styled.div`
-
- padding-left: 10px;
-height: 100%;
-
-
+  padding-left: 10px;
+  height: 100%;
 `;
 
 const Home = () => {
-    
-    return (
-      <Container >
-        <Sidebar />
-        <Navbar name ={"Dashboard"} />
-        <Cards />
-      </Container>
-    );
-}
+  const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
-export default Home
+  useEffect(() => {
+    fetch(`http://localhost:5000/dashboard/?Stream=All&semester=0`)
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data);
+        setFilteredData(data);
+        console.log(data);
+      })
+      .catch((error) => console.error(error));
+  }, []);
+
+  const handleSearch = (searchValue) => {
+    const filteredData = data.filter(
+      (data) =>
+        data.subject &&
+        data.subject.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredData(filteredData);
+    console.log(filteredData);
+  };
+
+  return (
+    <Container>
+      <Sidebar />
+      <Navbar name={'Dashboard'} handleSearch={handleSearch} />
+      <Cards data={filteredData} />
+    </Container>
+  );
+};
+
+export default Home;

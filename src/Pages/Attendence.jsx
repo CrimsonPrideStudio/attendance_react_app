@@ -23,6 +23,7 @@ const ScrollWa = styled.div`
 `;
 const Attendence = () => {
   const [attendance, setAttendance] = useState([]);
+  const [filteredAttendance, setFilteredAttendance] = useState([]);
   const params = useParams();
   const subject = params.subject;
 
@@ -31,14 +32,22 @@ const Attendence = () => {
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);
+        setFilteredAttendance(data);
         console.log(data);
       });
   }, [subject]);
 
+  const handleSearch = (searchValue) => {
+    const filteredData = attendance.filter((data) =>
+      data.Name.toLowerCase().includes(searchValue.toLowerCase())
+    );
+    setFilteredAttendance(filteredData);
+  };
+
   return (
     <Container>
       <Sidebar />
-      <Navbar name={''} />
+      <Navbar name={'Attendance'} />
       <ScrollWa>
         <AttendanceDetailsCard
           subject={subject}
@@ -49,9 +58,9 @@ const Attendence = () => {
             attendance.length > 0 ? attendance[0].Total_Student : ''
           }
         />
-        <MiddleNavBar />
+        <MiddleNavBar handleSearch={handleSearch} />
         <Wrapper screenY={window.screen.height}>
-          {attendance.map((data) => {
+          {filteredAttendance.map((data) => {
             return (
               <Sheet
                 key={data.id}

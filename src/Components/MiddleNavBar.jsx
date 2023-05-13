@@ -31,14 +31,13 @@ const Labels = styled.span`
   width: 20%;
   text-align: center;
 `;
-const MiddleNavBar = () => {
+const MiddleNavBar = ({ handleSearch }) => {
   return (
     <>
       <Options />
       <Middle>
         <Start>
-          {' '}
-          <SearchBar />
+          <SearchBar handleSearch={handleSearch} />
         </Start>
         <End>
           <Filter />

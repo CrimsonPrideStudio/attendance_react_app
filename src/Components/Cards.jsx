@@ -16,18 +16,7 @@ const styles = {
   textDecoration: 'none',
   color: 'inherit',
 };
-function Cards() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch(`http://localhost:5000/dashboard/?Stream=All&semester=0`)
-      .then((response) => response.json())
-      .then((data) => {
-        setData(data);
-        console.log(data);
-      })
-      .catch((error) => console.error(error));
-  }, []);
+function Cards({ data }) {
   return (
     <Wraper>
       {data.map((item) => {
