@@ -6,6 +6,7 @@ import Sidebar from '../Components/Sidebar';
 import StudentHeader from '../Components/StudentHeader';
 import StudentMiddleComponent from '../Components/StudentMiddleComponent';
 import { useState, useEffect } from 'react';
+import StudentCalendar from '../Components/StudentCalender';
 const Container = styled.div`
   padding-left: 10px;
   height: 100%;
@@ -36,10 +37,11 @@ const Student = () => {
       <Sidebar />
       <Navbar name={'Student Detail'} />
       <StudentHeader details={students} />
-      {/* <StudentMiddleComponent
+      <StudentMiddleComponent
         Stream={students.Stream}
         semester={students.semester}
-      /> */}
+      />
+      <StudentCalendar />
     </Container>
   );
 };
