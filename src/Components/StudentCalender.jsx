@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import styled from 'styled-components';
@@ -16,44 +16,41 @@ const StyledCalendar = styled(Calendar)`
     font-size: 1.5rem;
     padding: 10px;
   }
+  .highlight_Date{
+    background-color: #5df15d;
+  }
 `;
 
-function StudentCalendar({ datesToHighlight }) {
-  const [date, setDate] = useState(new Date());
+function StudentCalendar(props) {
+  const redDates = ['2023-05-20', '2023-05-06', '2023-04-28'];
+  const [presentDate, setDate] = useState([]);
+  useEffect(() => {
+    const fetchData = () => {
+      fetch(`http://127.0.0.1:5000/personalAttendance?student_id=${props.studentId}&Subject=${props.Subject}`)
+        .then((response) => response.json())
+        .then((data) => {
+          setDate(data.map(item => item.Update_Date));
+          
+        });
+    };
+    fetchData();
+  }, [props]);
 
-  // Define the function to determine the style of each tile
-  //   const tileContent = ({ date }) => {
-  //     const dateString = date.toISOString().slice(0, 10);
-
-  //     if (datesToHighlight.includes(dateString)) {
-  //       // This date should be highlighted with orange
-  //       return {
-  //         className: 'orange-highlight',
-  //         style: { backgroundColor: 'orange' },
-  //       };
-  //     } else if (date.getDay() === 0 || date.getDay() === 6) {
-  //       // This date is a weekend and should be highlighted with green
-  //       return {
-  //         className: 'green-highlight',
-  //         style: { backgroundColor: 'green' },
-  //       };
-  //     } else {
-  //       // This date does not need to be highlighted
-  //       return null;
-  //     }
-  //   };
-
-  const handleDateChange = (date) => {
-    setDate(date);
-  };
+  function getTileClassName({ date }) {
+    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+    const localDateString = localDate.toISOString().split('T')[0];
+    if (presentDate.includes(localDateString)) {
+      return 'highlight_Date';
+    }
+  }
+  
 
   return (
     <StyledCalendar
-      onChange={handleDateChange}
-      //   tileContent={tileContent}
-      value={date}
+      tileClassName={getTileClassName}
     />
   );
 }
+
 
 export default StudentCalendar;

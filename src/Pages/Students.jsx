@@ -40,8 +40,9 @@ const Student = () => {
       <StudentMiddleComponent
         Stream={students.Stream}
         semester={students.semester}
+        studentId = {studentId}
       />
-      <StudentCalendar />
+     
     </Container>
   );
 };

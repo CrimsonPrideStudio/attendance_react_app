@@ -30,6 +30,7 @@ const Bottom = styled.div`
   flex-wrap: wrap;
   padding: 10px;
   margin-top: 20px;
+  justify-content: space-between;
 `;
 const SubjectName = styled.span`
   font-size: 25px;

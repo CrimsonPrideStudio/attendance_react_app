@@ -33,7 +33,7 @@ const Attendence = () => {
       .then((data) => {
         setAttendance(data);
         setFilteredAttendance(data);
-        console.log(data);
+        
       });
   }, [subject]);
 
@@ -61,6 +61,7 @@ const Attendence = () => {
         <MiddleNavBar handleSearch={handleSearch} />
         <Wrapper screenY={window.screen.height}>
           {filteredAttendance.map((data) => {
+            console.log(data)
             return (
               <Sheet
                 key={data.id}

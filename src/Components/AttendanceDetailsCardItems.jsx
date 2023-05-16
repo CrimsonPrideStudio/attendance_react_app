@@ -3,21 +3,20 @@ import styled from 'styled-components';
 import icon from '../Image/user.png';
 
 const Container = styled.div`
-  max-width: 450px;
+  max-width: 350px;
   width: 100%;
   display: flex;
   padding: 5px 10px;
 `;
 
 const Contain = styled.div`
-   {
     width: 100%;
     max-width: 450px;
     display: flex;
     padding: 10px;
     border: 1px solid #e4e3e3;
     box-shadow: 0px 3px 6px #e4e3e3;
-  }
+  
 `;
 const Icon = styled.img`
   width: 50px;

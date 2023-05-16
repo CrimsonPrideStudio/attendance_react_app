@@ -1,7 +1,8 @@
-import { React, useState } from 'react';
-import styled from 'styled-components';
-import { useEffect } from 'react';
-import axios from 'axios';
+import { React, useState } from "react";
+import styled from "styled-components";
+import { useEffect } from "react";
+import axios from "axios";
+import StudentCalendar from "./StudentCalender";
 const Container = styled.div`
   display: flex;
   flex-direction: row;
@@ -14,10 +15,10 @@ const Option = styled.span`
   padding: 10px;
   padding-top: 0px;
   padding-bottom: 4px;
-  color: ${(props) => (props.selected ? '#000' : '#848da1')};
+  color: ${(props) => (props.selected ? "#000" : "#848da1")};
   font-size: ${(props) => (props.selected ? 20 : 18)}px;
   font-weight: ${(props) => (props.selected ? 600 : 500)};
-  border-bottom: ${(props) => (props.selected ? '2px solid #5A98FC' : 'none')};
+  border-bottom: ${(props) => (props.selected ? "2px solid #5A98FC" : "none")};
   cursor: pointer;
   &:hover {
     color: black;
@@ -57,23 +58,29 @@ const StudentMiddleComponent = (props) => {
   };
 
   return (
-    <Container>
-      {subjects ? (
-        subjects.map((subject) => {
-          return (
-            <Option
-              key={subject.Subject}
-              selected={selected === subject.Subject}
-              onClick={() => handleChange(subject.Subject)}
-            >
-              {subject.Subject}
-            </Option>
-          );
-        })
-      ) : (
-        <div>Loading...</div>
-      )}
-    </Container>
+    <>
+      <Container>
+        {subjects ? (
+          subjects.map((subject) => {
+            return (
+              <Option
+                key={subject.Subject}
+                selected={selected === subject.Subject}
+                onClick={() => handleChange(subject.Subject)}
+              >
+                {subject.Subject}
+              </Option>
+            );
+          })
+        ) : (
+          <div>Loading...</div>
+        )}
+      </Container>
+      <StudentCalendar
+       Subject = {selected}
+       studentId = {props.studentId}
+       />
+    </>
   );
 };
 
