@@ -19,17 +19,16 @@ const End = styled.div`
   justify-content: flex-end;
 `;
 const Last = styled.div`
+   
   display: flex;
-  flex-wrap: wrap;
-  padding: 10px;
-  width: 100%;
   align-items: center;
-  margin-right: 70px;
-  padding-left: 20px;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 5px 20px;
 `;
 const Labels = styled.span`
-  width: 20%;
   text-align: center;
+  
 `;
 const MiddleNavBar = ({ handleSearch }) => {
   return (
@@ -43,12 +42,12 @@ const MiddleNavBar = ({ handleSearch }) => {
           <Filter />
         </End>
       </Middle>
-      <Last>
-        <Labels>Student Name</Labels>
-        <Labels>Present/Absent</Labels>
-        <Labels>Branch</Labels>
-        <Labels>Year</Labels>
-        <Labels>Details</Labels>
+      <Last >
+        <Labels style={{width:"25%",textAlign:"left"}}>Student Name</Labels>
+        <Labels style={{width:"16.66666667%"}}>Present/Absent</Labels>
+        <Labels style={{width:"16.66666667%"}}>Branch</Labels>
+        <Labels style={{width:"16.66666667%"}}>Year</Labels>
+        <Labels style={{width:"25%"}}>Details</Labels>
       </Last>
     </>
   );

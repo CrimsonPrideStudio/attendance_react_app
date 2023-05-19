@@ -28,9 +28,10 @@ const Attendence = () => {
   const subject = params.subject;
 
   useEffect(() => {
-    fetch(`http://localhost:5000/attendance/?subject=${subject}`)
+    fetch(`http://localhost:5000/attendance/?Subject=${subject}`)
       .then((response) => response.json())
       .then((data) => {
+        console.log(data)
         setAttendance(data);
         setFilteredAttendance(data);
         

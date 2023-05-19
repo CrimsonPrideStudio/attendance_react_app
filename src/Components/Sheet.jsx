@@ -4,12 +4,11 @@ import user from '../Image/user.png';
 import { Link } from 'react-router-dom';
 const Container = styled.div`
   background-color: white;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
   padding: 10px;
+  display: flex;
   align-items: center;
   border-radius: 5px;
+  text-align: center;
   margin: 5px 20px;
   border: 1px solid #e4e3e3;
   box-shadow: 0px 3px 6px #e4e3e3;
@@ -61,31 +60,30 @@ const Year = styled.div`
 const Detail = styled.a`
   color: #3b83ff;
   font-weight: 700;
-  margin-right: 20px;
+ margin-left: 15px;
 `;
 const styles = {
-  textDecoration: 'none',
-  color: 'inherit',
+
 };
 const Sheet = (Props) => {
   return (
     <Container>
-      <Pack>
+      <Pack style={{width:"25%"}} >
         <CoverImg
           src='https://api.time.com/wp-content/uploads/2014/09/macaca_nigra_self-portrait_rotated_and_cropped.jpg?'
           alt='Article Cover'
         />
         <Name>{Props.Name}</Name>
       </Pack>
-      <Attendance>
+      <Attendance style={{width:"16.66666667%"}}>
         <AttendanceText>
           {Props.Present == 1 ? 'Present' : 'Absent'}
         </AttendanceText>
       </Attendance>
-      <Stream>{Props.Stream}</Stream>
-      <Year>{Props.semester}</Year>
-      <Link to={`/students/${Props.rollNumber}`} style={styles}>
-        <Detail>See Student Detail</Detail>
+      <Stream style={{width:"16.66666667%"}}>{Props.Stream}</Stream>
+      <Year style={{width:"16.66666667%"}}>{Props.semester}</Year>
+      <Link style={{width:"25%",textDecoration:"none"}} to={`/students/${Props.rollNumber}`}>
+        <Detail >See Student Detail</Detail>
       </Link>
     </Container>
   );

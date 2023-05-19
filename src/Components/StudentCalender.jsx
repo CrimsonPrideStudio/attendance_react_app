@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import Calendar from 'react-calendar';
-import 'react-calendar/dist/Calendar.css';
-import styled from 'styled-components';
+import React, { useEffect, useState } from "react";
+import Calendar from "react-calendar";
+import "react-calendar/dist/Calendar.css";
+import styled from "styled-components";
 
 const StyledCalendar = styled(Calendar)`
   border: none;
@@ -16,41 +16,37 @@ const StyledCalendar = styled(Calendar)`
     font-size: 1.5rem;
     padding: 10px;
   }
-  .highlight_Date{
+  .highlight_Date {
     background-color: #5df15d;
   }
 `;
 
 function StudentCalendar(props) {
-  const redDates = ['2023-05-20', '2023-05-06', '2023-04-28'];
   const [presentDate, setDate] = useState([]);
   useEffect(() => {
     const fetchData = () => {
-      fetch(`http://127.0.0.1:5000/personalAttendance?student_id=${props.studentId}&Subject=${props.Subject}`)
+      fetch(
+        `http://127.0.0.1:5000/personalAttendance?student_id=${props.studentId}&Subject=${props.Subject}`
+      )
         .then((response) => response.json())
         .then((data) => {
-          setDate(data.map(item => item.Update_Date));
-          
+          setDate(data.map((item) => item.Update_Date));
         });
     };
     fetchData();
   }, [props]);
 
   function getTileClassName({ date }) {
-    const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-    const localDateString = localDate.toISOString().split('T')[0];
+    const localDate = new Date(
+      date.getTime() - date.getTimezoneOffset() * 60000
+    );
+    const localDateString = localDate.toISOString().split("T")[0];
     if (presentDate.includes(localDateString)) {
-      return 'highlight_Date';
+      return "highlight_Date";
     }
   }
-  
 
-  return (
-    <StyledCalendar
-      tileClassName={getTileClassName}
-    />
-  );
+  return <StyledCalendar tileClassName={getTileClassName} />;
 }
-
 
 export default StudentCalendar;
