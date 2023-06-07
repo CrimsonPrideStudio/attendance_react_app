@@ -19,7 +19,6 @@ const Home = () => {
       .then((data) => {
         setData(data);
         setFilteredData(data);
-        console.log(data);
       })
       .catch((error) => console.error(error));
   }, []);
@@ -31,7 +30,6 @@ const Home = () => {
         data.subject.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredData(filteredData);
-    console.log(filteredData);
   };
 
   return (

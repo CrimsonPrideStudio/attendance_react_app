@@ -40,9 +40,6 @@ export default function Card(props) {
   // let month = props.date.toLocaleString('en-US', { month: 'long' });
   // month = month.length > 5 ? month.slice(0, 3) : month;
   // const year = props.date.getFullYear();
-
-  console.log(props);
-
   return (
     <Card1>
       <Sname>{props.subject}</Sname>

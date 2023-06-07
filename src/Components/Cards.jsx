@@ -20,6 +20,7 @@ function Cards({ data }) {
   return (
     <Wraper>
       {data.map((item) => {
+        console.log(data);
         return (
           <Link
             key={item.id}
@@ -31,7 +32,9 @@ function Cards({ data }) {
               semester={item.semester}
               date={item.Update_Date}
               teacher={item.teacher}
-              percentage={`${(item.Present / item.Total_Student) * 100}`}
+              percentage={`${
+                (item.Present_Students / item.Total_Student) * 100
+              }`}
             />
           </Link>
         );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { useRef, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import AttendanceDetailsCardItems from './AttendanceDetailsCardItems';
 
@@ -50,26 +51,49 @@ const Stream = styled.span`
   font-weight: 600;
 `;
 const AttendanceDetailsCard = (props) => {
+  const subject = props.subject;
+  const [attendance, setAttendance] = useState([]);
+  useEffect(() => {
+    fetch(`http://localhost:5000/dashboard/?Subject=${subject}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setAttendance(data);
+      });
+  }, []);
+
+  // stream=
+  // semester=
+  // Present=
+  // totalStudent=
+
   return (
     <Container>
       <Wrapper>
         <Top>
           <SubjectName>Subject:{props.subject}</SubjectName>
-          <Stream>Stream: {props.stream}</Stream>
-          <Semester>Semester: {props.semester}</Semester>
+          <Stream>
+            Stream: {attendance.length > 0 ? attendance[0].Stream : ''}
+          </Stream>
+          <Semester>
+            Semester:{attendance.length > 0 ? attendance[0].semester : ''}
+          </Semester>
         </Top>
         <Bottom>
           <AttendanceDetailsCardItems
             title={'Total Student'}
-            data={props.totalStudent}
+            data={attendance.length > 0 ? attendance[0].Total_Student : ''}
           />
           <AttendanceDetailsCardItems
             title={'Present Student'}
-            data={props.Present}
+            data={attendance.length > 0 ? attendance[0].Present_Students : ''}
           />
           <AttendanceDetailsCardItems
             title={'Absent Student'}
-            data={`${props.totalStudent - props.Present}`}
+            data={
+              attendance.length > 0
+                ? attendance[0].Total_Student - attendance[0].Present_Students
+                : ''
+            }
           />
         </Bottom>
       </Wrapper>

@@ -31,12 +31,10 @@ const Attendence = () => {
     fetch(`http://localhost:5000/attendance/?Subject=${subject}`)
       .then((response) => response.json())
       .then((data) => {
-        console.log(data)
         setAttendance(data);
         setFilteredAttendance(data);
-        
       });
-  }, [subject]);
+  }, []);
 
   const handleSearch = (searchValue) => {
     const filteredData = attendance.filter((data) =>
@@ -50,19 +48,11 @@ const Attendence = () => {
       <Sidebar />
       <Navbar name={'Attendance'} />
       <ScrollWa>
-        <AttendanceDetailsCard
-          subject={subject}
-          stream={attendance.length > 0 ? attendance[0].Stream : ''}
-          semester={attendance.length > 0 ? attendance[0].semester : ''}
-          Present={attendance.length > 0 ? attendance[0].Present : ''}
-          totalStudent={
-            attendance.length > 0 ? attendance[0].Total_Student : ''
-          }
-        />
+        <AttendanceDetailsCard subject={subject} />
         <MiddleNavBar handleSearch={handleSearch} />
         <Wrapper screenY={window.screen.height}>
           {filteredAttendance.map((data) => {
-            console.log(data)
+            console.log(data);
             return (
               <Sheet
                 key={data.id}
