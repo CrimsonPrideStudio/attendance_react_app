@@ -66,6 +66,7 @@ const styles = {
 
 };
 const Sheet = (Props) => {
+
   return (
     <Container>
       <Pack style={{width:"25%"}} >
@@ -75,13 +76,14 @@ const Sheet = (Props) => {
         />
         <Name>{Props.Name}</Name>
       </Pack>
-      <Attendance style={{width:"16.66666667%"}}>
+      <Attendance style={{width:"12.5%"}}>
         <AttendanceText>
           {Props.Present == 1 ? 'Present' : 'Absent'}
         </AttendanceText>
       </Attendance>
-      <Stream style={{width:"16.66666667%"}}>{Props.Stream}</Stream>
-      <Year style={{width:"16.66666667%"}}>{Props.semester}</Year>
+      <Stream style={{width:"12.5%"}}>{Props.Stream}</Stream>
+      <Year style={{width:"12.5%"}}>{Props.semester}</Year>
+      <Year style={{width:"12.5%",textAlign:"center"}}>{Props.date}</Year>
       <Link style={{width:"25%",textDecoration:"none"}} to={`/students/${Props.rollNumber}`}>
         <Detail >See Student Detail</Detail>
       </Link>

@@ -26,21 +26,32 @@ const Attendence = () => {
   const [filteredAttendance, setFilteredAttendance] = useState([]);
   const params = useParams();
   const subject = params.subject;
-
+  const [queryDate, setQueryDate] = useState('All');
   useEffect(() => {
-    fetch(`http://localhost:5000/attendance/?Subject=${subject}`)
+    fetch(`http://localhost:5000/attendance/?Subject=${subject}&date=${queryDate}`)
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);
         setFilteredAttendance(data);
       });
-  }, []);
+  }, [queryDate]);
 
   const handleSearch = (searchValue) => {
     const filteredData = attendance.filter((data) =>
       data.Name.toLowerCase().includes(searchValue.toLowerCase())
     );
     setFilteredAttendance(filteredData);
+  };
+  const handleDateChange = (date) => {
+    const formattedDate = date
+      ? date.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'numeric',
+          year: '2-digit',
+        }).replace(/\//g, '-')
+      : 'All';
+    setQueryDate(formattedDate);
+    console.log(formattedDate)
   };
 
   return (
@@ -49,7 +60,7 @@ const Attendence = () => {
       <Navbar name={'Attendance'} />
       <ScrollWa>
         <AttendanceDetailsCard subject={subject} />
-        <MiddleNavBar handleSearch={handleSearch} />
+        <MiddleNavBar handleSearch={handleSearch} handleDateChange={handleDateChange} />
         <Wrapper screenY={window.screen.height}>
           {filteredAttendance.map((data) => {
             console.log(data);
@@ -61,6 +72,7 @@ const Attendence = () => {
                 Present={data.Present}
                 Stream={data.Stream}
                 semester={data.semester}
+                date= {data.Update_Date}
               />
             );
           })}

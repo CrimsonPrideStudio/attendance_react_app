@@ -1,8 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import Filter from './Filter';
 import Options from './Options';
 import SearchBar from './Searchbar';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 
 const Middle = styled.div`
   display: flex;
@@ -19,7 +21,6 @@ const End = styled.div`
   justify-content: flex-end;
 `;
 const Last = styled.div`
-   
   display: flex;
   align-items: center;
   border-radius: 5px;
@@ -28,9 +29,21 @@ const Last = styled.div`
 `;
 const Labels = styled.span`
   text-align: center;
-  
 `;
-const MiddleNavBar = ({ handleSearch }) => {
+const MiddleNavBar = ({ handleSearch, handleDateChange }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedDate, setSelectedDate] = useState(null);
+
+  const toggleCalendar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const onDateChange = (date) => {
+    setSelectedDate(date);
+    handleDateChange(date); // Callback to the parent component
+    setIsOpen(false);
+  };
+
   return (
     <>
       <Options />
@@ -39,15 +52,27 @@ const MiddleNavBar = ({ handleSearch }) => {
           <SearchBar handleSearch={handleSearch} />
         </Start>
         <End>
-          <Filter />
+          <div>
+            <input
+              type="text"
+              value={selectedDate ? selectedDate.toLocaleDateString() : ''}
+              onClick={toggleCalendar}
+            />
+            {isOpen && (
+              <div style={{ position: 'absolute', right: '10px' }}>
+                <DatePicker selected={selectedDate} onChange={onDateChange} inline />
+              </div>
+            )}
+          </div>
         </End>
       </Middle>
-      <Last >
-        <Labels style={{width:"25%",textAlign:"left"}}>Student Name</Labels>
-        <Labels style={{width:"16.66666667%"}}>Present/Absent</Labels>
-        <Labels style={{width:"16.66666667%"}}>Branch</Labels>
-        <Labels style={{width:"16.66666667%"}}>Year</Labels>
-        <Labels style={{width:"25%"}}>Details</Labels>
+      <Last>
+        <Labels style={{ width: '25%', textAlign: 'left' }}>Student Name</Labels>
+        <Labels style={{ width: '12.5%' }}>Present/Absent</Labels>
+        <Labels style={{ width: '12.5%' }}>Branch</Labels>
+        <Labels style={{ width: '12.5%' }}>Year</Labels>
+        <Labels style={{ width: '12.5%' }}>Date</Labels>
+        <Labels style={{ width: '25%' }}>Details</Labels>
       </Last>
     </>
   );

@@ -80,34 +80,34 @@ const Sidebar = () => {
           <Link to='/' style={{ textDecoration: 'none' }}>
             <SideBarItems
               name='Dashboard'
-              icon={<MdDashboard style={fontSize} />}
+              icon={<MdDashboard style={{fontSize: '20px', color: '#ffffff'}} />}
             />
           </Link>
           <Label>Organize</Label>
           <Link to='' style={{ textDecoration: 'none' }}>
             <SideBarItems
               name='Students'
-              icon={<FaUserGraduate style={fontSize} />}
+              icon={<FaUserGraduate style={{fontSize: '20px', color: '#ffffff'}} />}
             />
           </Link>
           <Link to='' style={{ textDecoration: 'none' }}>
             <SideBarItems
               name='Faculty'
-              icon={<HiUserGroup style={fontSize} />}
+              icon={<HiUserGroup style={{fontSize: '20px', color: '#3b3b3b'}} />}
             />
           </Link>
           <Label>Manage</Label>
-          <Link to='' style={{ textDecoration: 'none' }}>
+          <Link to='' style={{ textDecoration: 'none', color: '#3b3b3b' }}>
             <SideBarItems
               name='User'
-              icon={<BsFillPersonFill style={fontSize} />}
+              icon={<BsFillPersonFill style={{fontSize: '20px', color: '#3b3b3b'}} />}
             />
           </Link>
         </Middle>
 
         <Bottom>
           <LogoutPanel>
-            <SideBarItems name='LogOut' icon={<Logout style={fontSize} />} />
+            <SideBarItems name='LogOut' icon={<Logout style={{fontSize: '20px', color: '#3b3b3b'}} />} />
           </LogoutPanel>
         </Bottom>
       </Wrapper>
