@@ -11,6 +11,12 @@ const Middle = styled.div`
   flex-direction: row;
   justify-content: space-between;
 `;
+
+const ClearButton = styled.button`
+  margin-right: 8px;
+  padding: 8px 4px;
+`;
+
 const Start = styled.div`
   display: flex;
   flex: 1;
@@ -37,6 +43,9 @@ const MiddleNavBar = ({ handleSearch, handleDateChange }) => {
   const toggleCalendar = () => {
     setIsOpen(!isOpen);
   };
+  const clearDate = () => {
+    setSelectedDate(null);
+  };
 
   const onDateChange = (date) => {
     setSelectedDate(date);
@@ -54,20 +63,28 @@ const MiddleNavBar = ({ handleSearch, handleDateChange }) => {
         <End>
           <div>
             <input
-              type="text"
+              type='text'
               value={selectedDate ? selectedDate.toLocaleDateString() : ''}
               onClick={toggleCalendar}
+              style={{ padding: '8px' }}
             />
+            <ClearButton onClick={clearDate}>Clear</ClearButton>
             {isOpen && (
               <div style={{ position: 'absolute', right: '10px' }}>
-                <DatePicker selected={selectedDate} onChange={onDateChange} inline />
+                <DatePicker
+                  selected={selectedDate}
+                  onChange={onDateChange}
+                  inline
+                />
               </div>
             )}
           </div>
         </End>
       </Middle>
       <Last>
-        <Labels style={{ width: '25%', textAlign: 'left' }}>Student Name</Labels>
+        <Labels style={{ width: '25%', textAlign: 'left' }}>
+          Student Name
+        </Labels>
         <Labels style={{ width: '12.5%' }}>Present/Absent</Labels>
         <Labels style={{ width: '12.5%' }}>Branch</Labels>
         <Labels style={{ width: '12.5%' }}>Year</Labels>
