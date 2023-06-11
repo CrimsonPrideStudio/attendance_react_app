@@ -44,11 +44,7 @@ const Attendence = () => {
   };
   const handleDateChange = (date) => {
     const formattedDate = date
-      ? date.toLocaleDateString('en-GB', {
-          day: '2-digit',
-          month: 'numeric',
-          year: '2-digit',
-        }).replace(/\//g, '-')
+      ? date.toISOString().split('T')[0]
       : 'All';
     setQueryDate(formattedDate);
     console.log(formattedDate)
@@ -72,7 +68,7 @@ const Attendence = () => {
                 Present={data.Present}
                 Stream={data.Stream}
                 semester={data.semester}
-                date= {data.Update_Date}
+                date= {data.Attendance_Date}
               />
             );
           })}
