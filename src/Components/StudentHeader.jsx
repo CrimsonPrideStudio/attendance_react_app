@@ -56,6 +56,7 @@ const CoverImg = styled.img`
 `;
 
 export default function StudentHeader(students) {
+
   return (
     <Container>
       <Left>
@@ -79,7 +80,8 @@ export default function StudentHeader(students) {
       </Left>
       <Right>
         <CoverImg
-          src={students.details?.Profile ? students.details.Profile : user}
+
+          src={students.details?.Profile ? `https://firebasestorage.googleapis.com/v0/b/attandenceapp-4084c.appspot.com/o/images%2F${students.details.Profile}?alt=media&token=37dbd09b-a56b-4243-b454-d10e1642d84a&_gl=1*dw42pg*_ga*MTU2MDQ1NTczNy4xNjgyOTU0NDQ5*_ga_CW55HF8NVT*MTY4NjQ4Mzk0MS4xMC4xLjE2ODY0ODM5NTUuMC4wLjA.` : user}
           alt='Profile Image'
         />
       </Right>
