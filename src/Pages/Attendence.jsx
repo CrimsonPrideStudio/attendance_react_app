@@ -1,12 +1,12 @@
-import React from 'react';
-import { useRef, useState, useEffect } from 'react';
-import styled from 'styled-components';
-import AttendanceDetailsCard from '../Components/AttendanceDetailsCard';
-import { useParams } from 'react-router-dom';
-import Sheet from '../Components/Sheet';
-import Navbar from '../Components/Navbar';
-import Sidebar from '../Components/Sidebar';
-import MiddleNavBar from '../Components/MiddleNavBar';
+import React from "react";
+import { useRef, useState, useEffect } from "react";
+import styled from "styled-components";
+import AttendanceDetailsCard from "../Components/AttendanceDetailsCard";
+import { useParams } from "react-router-dom";
+import Sheet from "../Components/Sheet";
+import Navbar from "../Components/Navbar";
+import Sidebar from "../Components/Sidebar";
+import MiddleNavBar from "../Components/MiddleNavBar";
 
 const Container = styled.div`
   padding-left: 10px;
@@ -26,9 +26,11 @@ const Attendence = () => {
   const [filteredAttendance, setFilteredAttendance] = useState([]);
   const params = useParams();
   const subject = params.subject;
-  const [queryDate, setQueryDate] = useState('All');
+  const [queryDate, setQueryDate] = useState("All");
   useEffect(() => {
-    fetch(`http://localhost:5000/attendance/?Subject=${subject}&date=${queryDate}`)
+    fetch(
+      `http://localhost:5000/attendance/?Subject=${subject}&date=${queryDate}`
+    )
       .then((response) => response.json())
       .then((data) => {
         setAttendance(data);
@@ -43,20 +45,27 @@ const Attendence = () => {
     setFilteredAttendance(filteredData);
   };
   const handleDateChange = (date) => {
-    const formattedDate = date
-      ? date.toISOString().split('T')[0]
-      : 'All';
-    setQueryDate(formattedDate);
-    console.log(formattedDate)
+    if (date == "All") {
+
+      setQueryDate("All");
+    }else{
+      const formattedDate = date ? date.toISOString().split("T")[0] : "All";
+      setQueryDate(formattedDate);
+    }
+
+   
   };
 
   return (
     <Container>
       <Sidebar />
-      <Navbar name={'Attendance'} />
+      <Navbar name={"Attendance"} />
       <ScrollWa>
         <AttendanceDetailsCard subject={subject} />
-        <MiddleNavBar handleSearch={handleSearch} handleDateChange={handleDateChange} />
+        <MiddleNavBar
+          handleSearch={handleSearch}
+          handleDateChange={handleDateChange}
+        />
         <Wrapper screenY={window.screen.height}>
           {filteredAttendance.map((data) => {
             console.log(data);
@@ -68,7 +77,7 @@ const Attendence = () => {
                 Present={data.Present}
                 Stream={data.Stream}
                 semester={data.semester}
-                date= {data.Attendance_Date}
+                date={data.Attendance_Date}
               />
             );
           })}

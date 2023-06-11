@@ -45,6 +45,7 @@ const MiddleNavBar = ({ handleSearch, handleDateChange }) => {
   };
   const clearDate = () => {
     setSelectedDate(null);
+    handleDateChange("All");
   };
 
   const onDateChange = (date) => {
